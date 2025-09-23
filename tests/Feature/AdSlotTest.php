@@ -28,7 +28,16 @@ class AdSlotTest extends TestCase
 
 
         $response = $this->getJson('/api/ad-slots');
-        $response->assertStatus(200)->assertJsonStructure(['data','links','meta']);
+
+        $response->assertStatus(200)->assertJsonStructure([
+            'current_page',
+             'data',
+             'first_page_url',
+             'last_page_url',
+             'per_page',
+             'total',
+             'links'
+            ]);
     }
 
 

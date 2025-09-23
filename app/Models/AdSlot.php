@@ -4,9 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class AdSlot extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'name','start_time','end_time',
         'minimum_bid_price','status','winner_bid_id'
