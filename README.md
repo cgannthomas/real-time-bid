@@ -21,6 +21,7 @@
   php artisan migrate --seed
   php artisan queue:work
   php artisan schedule:work
+  php artisan serve
 
 ## Auth
 - Login with `/api/sanctum/token` (POST: email, password)
@@ -53,3 +54,9 @@ user1@example.com / password
     - collection which can use for fresh importing (see `postman-collection.json`)
 - Database with data
     - exported database (see `realtime_app.sql`)
+
+## included feature test
+- see `tests`
+- run test with 
+    php artisan test
+
