@@ -4,7 +4,8 @@
 		"name": "real-time-app",
 		"description": "Postman collection with dynamic token handling",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "47735917"
+		"_exporter_id": "47735917",
+		"_collection_link": "https://cgann02-8521737.postman.co/workspace/Personal-Workspace~83a1fdc7-a578-4703-a196-9b2ac3a32f3b/collection/47735917-cb87a682-0c54-42e6-a5bb-4425d7b036b4?action=share&source=collection_link&creator=47735917"
 	},
 	"item": [
 		{
@@ -36,17 +37,14 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"email\": \"rogelio.sawayn@example.net\",\n  \"password\": \"password\"\n}"
+					"raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"password\"\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/sanctum/token",
-					"protocol": "http",
+					"raw": "{{url}}/sanctum/token",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8000",
 					"path": [
-						"api",
 						"sanctum",
 						"token"
 					]
@@ -136,14 +134,11 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8000/api/ad-slots?status=open",
-					"protocol": "http",
+					"raw": "{{url}}/ad-slots?status=open",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8000",
 					"path": [
-						"api",
 						"ad-slots"
 					],
 					"query": [
@@ -387,14 +382,11 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8000/api/ad-slots?status=upcoming",
-					"protocol": "http",
+					"raw": "{{url}}/ad-slots?status=upcoming",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8000",
 					"path": [
-						"api",
 						"ad-slots"
 					],
 					"query": [
@@ -638,14 +630,11 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8000/api/ad-slots?status=closed",
-					"protocol": "http",
+					"raw": "{{url}}/ad-slots?status=closed",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8000",
 					"path": [
-						"api",
 						"ad-slots"
 					],
 					"query": [
@@ -747,19 +736,16 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"amount\": 100.00\n}"
+					"raw": "{\n  \"amount\": 150.00\n}"
 				},
 				"url": {
-					"raw": "http://localhost:8000/api/ad-slots/7/bid",
-					"protocol": "http",
+					"raw": "{{url}}/ad-slots/1/bid",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8000",
 					"path": [
-						"api",
 						"ad-slots",
-						"7",
+						"1",
 						"bid"
 					]
 				}
@@ -904,6 +890,73 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"message\": \"Bid received and queued\"\n}"
+				},
+				{
+					"name": "success below minimum respose",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 9.00\n}"
+						},
+						"url": {
+							"raw": "{{url}}/ad-slots/1/bid",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ad-slots",
+								"1",
+								"bid"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 24 Sep 2025 04:15:26 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Bid below minimum price\"\n}"
 				}
 			]
 		},
@@ -919,14 +972,11 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:8000/api/ad-slots/7/winner",
-					"protocol": "http",
+					"raw": "{{url}}/ad-slots/7/winner",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8000",
 					"path": [
-						"api",
 						"ad-slots",
 						"7",
 						"winner"
@@ -995,6 +1045,280 @@
 					],
 					"cookie": [],
 					"body": "{\n    \"id\": 1,\n    \"ad_slot_id\": 7,\n    \"bid_id\": 2,\n    \"user_id\": 2,\n    \"amount\": \"100.00\",\n    \"created_at\": \"2025-09-23T17:03:01.000000Z\",\n    \"updated_at\": \"2025-09-23T17:03:01.000000Z\",\n    \"bid\": {\n        \"id\": 2,\n        \"user_id\": 2,\n        \"ad_slot_id\": 7,\n        \"amount\": \"100.00\",\n        \"created_at\": \"2025-09-23T16:55:45.000000Z\",\n        \"updated_at\": \"2025-09-23T16:55:45.000000Z\",\n        \"user\": {\n            \"id\": 2,\n            \"name\": \"Santino Robel\",\n            \"email\": \"rogelio.sawayn@example.net\",\n            \"email_verified_at\": \"2025-09-23T16:11:20.000000Z\",\n            \"created_at\": \"2025-09-23T16:11:20.000000Z\",\n            \"updated_at\": \"2025-09-23T16:11:20.000000Z\"\n        }\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "logout",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/logout",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "success-response",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 24 Sep 2025 06:28:18 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Successfully logged out\"\n}"
+				}
+			]
+		},
+		{
+			"name": "admin create or update ad slots",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{token}}",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Slots #105\",\r\n    \"start_time\" : \"24-09-2025 12:10:38\",\r\n    \"end_time\" : \"24-09-2025 12:15:38\",\r\n    \"minimum_bid_price\": \"50\"\r\n    ,\"slot_id\": 11 //use for update a slot\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/admin/ad-slots",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"admin",
+						"ad-slots"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "auth error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Slots #100\",\r\n    \"start_time\" : \"2025-09-24 10:10:38\",\r\n    \"end_time\" : \"2025-09-24 10:15:38\",\r\n    \"minimum_bid_price\": \"50\"\r\n    // ,\"slot_id\": 2 //use for update a slot\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/ad-slots",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"ad-slots"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 24 Sep 2025 05:25:08 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Admin access only.\"\n}"
+				},
+				{
+					"name": "validation error",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\" : \"Slots #101\",\r\n    \"start_time\" : \"24-09-2025 12:10:38\",\r\n    \"end_time\" : \"24-09-2025 12:15:38\",\r\n    \"minimum_bid_price\": \"50\"\r\n    // ,\"slot_id\": 2 //use for update a slot\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/ad-slots",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"ad-slots"
+							]
+						}
+					},
+					"status": "Unprocessable Content",
+					"code": 422,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.12"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 24 Sep 2025 06:26:13 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"The slot name already exists. Kindly use a different name.\",\n    \"errors\": {\n        \"name\": [\n            \"The slot name already exists. Kindly use a different name.\"\n        ]\n    }\n}"
 				}
 			]
 		}

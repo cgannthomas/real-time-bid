@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AdSlotController;
 use App\Http\Controllers\Api\BidController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\AdminAdSlotController;
 
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
@@ -20,9 +21,11 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/ad-slots/{id}/bid', [BidController::class,'place']);
     Route::get('/me/bids', [BidController::class,'history']);
+
+    Route::get('/logout', [AuthController::class, 'logout']);
 });
 
 // Admin routes (optional) -> secure these with gate/role middleware
-// Route::middleware(['auth:sanctum','can:admin'])->group(function () {
-//     Route::post('/admin/ad-slots', [\App\Http\Controllers\Api\AdminAdSlotController::class,'store']);
-// });
+Route::middleware(['auth:sanctum','admin'])->group(function () {
+    Route::post('/admin/ad-slots', [AdminAdSlotController::class,'store']);
+});

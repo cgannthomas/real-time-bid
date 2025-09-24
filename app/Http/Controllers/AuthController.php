@@ -18,4 +18,14 @@ class AuthController extends Controller
     {
         return $this->logService->login($request);
     }
+
+    public function logout(Request $request)
+    {
+        // Revoke only the current access token
+        $request->user()->currentAccessToken()->delete();
+        // $request->user()->tokens()->delete(); //logout from all devices
+        return response()->json([
+            'message' => 'Successfully logged out'
+        ]);
+    }
 }
