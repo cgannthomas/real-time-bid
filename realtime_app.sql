@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 23, 2025 at 07:12 PM
+-- Generation Time: Sep 24, 2025 at 08:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -29,10 +29,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `ad_slots` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
   `start_time` timestamp NULL DEFAULT NULL,
   `end_time` timestamp NULL DEFAULT NULL,
-  `minimum_bid_price` decimal(12,2) NOT NULL DEFAULT 0.00,
+  `minimum_bid_price` decimal(4,2) NOT NULL DEFAULT 0.00,
   `status` enum('upcoming','open','closed','awarded') NOT NULL DEFAULT 'upcoming',
   `winner_bid_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -44,17 +44,11 @@ CREATE TABLE `ad_slots` (
 --
 
 INSERT INTO `ad_slots` (`id`, `name`, `start_time`, `end_time`, `minimum_bid_price`, `status`, `winner_bid_id`, `created_at`, `updated_at`) VALUES
-(1, 'Slot #1', '2025-09-23 10:43:20', '2025-09-23 10:46:20', 10.00, 'closed', NULL, '2025-09-23 10:41:20', '2025-09-23 10:47:00'),
-(2, 'Slot #2', '2025-09-23 10:45:20', '2025-09-23 10:48:20', 10.00, 'closed', NULL, '2025-09-23 10:41:20', '2025-09-23 10:49:00'),
-(3, 'Slot #3', '2025-09-23 10:47:20', '2025-09-23 10:50:20', 10.00, 'closed', NULL, '2025-09-23 10:41:20', '2025-09-23 10:51:00'),
-(4, 'Slot #4', '2025-09-23 10:49:20', '2025-09-23 10:52:20', 10.00, 'closed', NULL, '2025-09-23 10:41:20', '2025-09-23 10:53:00'),
-(5, 'Slot #5', '2025-09-23 10:51:20', '2025-09-23 10:54:20', 10.00, 'closed', NULL, '2025-09-23 10:41:20', '2025-09-23 10:55:00'),
-(6, 'Slot #10', '2025-09-23 10:47:20', '2025-09-24 10:50:20', 10.00, 'open', NULL, '2025-09-23 10:41:20', '2025-09-23 10:51:00'),
-(7, 'Slot #11', '2025-09-23 10:49:20', '2025-09-23 10:52:20', 10.00, 'awarded', 2, '2025-09-23 10:41:20', '2025-09-23 11:33:01'),
-(8, 'Slot #12', '2025-09-23 10:51:20', '2025-09-24 10:54:20', 10.00, 'open', NULL, '2025-09-23 10:41:20', '2025-09-23 10:55:00'),
-(9, 'Slot #13', '2025-09-24 10:47:20', '2025-09-25 10:50:20', 10.00, 'upcoming', NULL, '2025-09-23 10:41:20', '2025-09-23 10:51:00'),
-(10, 'Slot #14', '2025-09-24 10:49:20', '2025-09-25 10:52:20', 10.00, 'upcoming', NULL, '2025-09-23 10:41:20', '2025-09-23 10:53:00'),
-(11, 'Slot #15', '2025-09-24 10:51:20', '2025-09-25 10:54:20', 10.00, 'upcoming', NULL, '2025-09-23 10:41:20', '2025-09-23 10:55:00');
+(1, 'Slot #1', '2025-09-24 06:31:41', '2025-09-24 06:34:41', 10.00, 'upcoming', NULL, '2025-09-24 06:29:41', '2025-09-24 06:29:41'),
+(2, 'Slot #2', '2025-09-24 06:33:41', '2025-09-24 06:36:41', 10.00, 'upcoming', NULL, '2025-09-24 06:29:41', '2025-09-24 06:29:41'),
+(3, 'Slot #3', '2025-09-24 06:35:41', '2025-09-24 06:38:41', 10.00, 'upcoming', NULL, '2025-09-24 06:29:41', '2025-09-24 06:29:41'),
+(4, 'Slot #4', '2025-09-24 06:37:41', '2025-09-24 06:40:41', 10.00, 'upcoming', NULL, '2025-09-24 06:29:41', '2025-09-24 06:29:41'),
+(5, 'Slot #5', '2025-09-24 06:39:41', '2025-09-24 06:42:41', 10.00, 'upcoming', NULL, '2025-09-24 06:29:41', '2025-09-24 06:29:41');
 
 -- --------------------------------------------------------
 
@@ -70,14 +64,6 @@ CREATE TABLE `bids` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `bids`
---
-
-INSERT INTO `bids` (`id`, `user_id`, `ad_slot_id`, `amount`, `created_at`, `updated_at`) VALUES
-(1, 12, 7, 25.00, '2025-09-23 11:24:34', '2025-09-23 11:24:34'),
-(2, 2, 7, 100.00, '2025-09-23 11:25:45', '2025-09-23 11:25:45');
 
 -- --------------------------------------------------------
 
@@ -210,15 +196,6 @@ CREATE TABLE `personal_access_tokens` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `personal_access_tokens`
---
-
-INSERT INTO `personal_access_tokens` (`id`, `tokenable_type`, `tokenable_id`, `name`, `token`, `abilities`, `last_used_at`, `expires_at`, `created_at`, `updated_at`) VALUES
-(1, 'App\\Models\\User', 12, 'api-token', 'bc6d278c28650bfe6c81dc857f4b3ca41aebf450508d14cffa4059aae85f5f7b', '[\"*\"]', NULL, NULL, '2025-09-23 10:41:29', '2025-09-23 10:41:29'),
-(2, 'App\\Models\\User', 12, 'api-token', '209328a94beff8e43321d224ec7a83b987081648575a95d619a332d96eeaf6c4', '[\"*\"]', '2025-09-23 11:11:15', NULL, '2025-09-23 10:54:13', '2025-09-23 11:11:15'),
-(3, 'App\\Models\\User', 12, 'api-token', '61c7a7526e2b16211983a556e3c7d4ac6c27562dc7952a67891cc9a28d2f92cf', '[\"*\"]', '2025-09-23 11:34:32', NULL, '2025-09-23 11:12:27', '2025-09-23 11:34:32');
-
 -- --------------------------------------------------------
 
 --
@@ -246,6 +223,7 @@ CREATE TABLE `users` (
   `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
+  `is_admin` enum('1','0') NOT NULL DEFAULT '0',
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -255,19 +233,19 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Merritt Greenfelder', 'savion24@example.org', '2025-09-23 10:41:20', '$2y$12$S7E1WmAOYNZssILo/AKLJOzrI1fl6TDqMYIck6IL1Vub2yHK9W6UO', 'yzu7rA43UB', '2025-09-23 10:41:20', '2025-09-23 10:41:20'),
-(2, 'Santino Robel', 'rogelio.sawayn@example.net', '2025-09-23 10:41:20', '$2y$12$S7E1WmAOYNZssILo/AKLJOzrI1fl6TDqMYIck6IL1Vub2yHK9W6UO', '2gRaRpBy4y', '2025-09-23 10:41:20', '2025-09-23 10:41:20'),
-(3, 'Sid Grady', 'guido74@example.net', '2025-09-23 10:41:20', '$2y$12$S7E1WmAOYNZssILo/AKLJOzrI1fl6TDqMYIck6IL1Vub2yHK9W6UO', 'cqT9BGw8Mb', '2025-09-23 10:41:20', '2025-09-23 10:41:20'),
-(4, 'Verdie Russel', 'ardella.wunsch@example.net', '2025-09-23 10:41:20', '$2y$12$S7E1WmAOYNZssILo/AKLJOzrI1fl6TDqMYIck6IL1Vub2yHK9W6UO', 'ZgkHYozaqR', '2025-09-23 10:41:20', '2025-09-23 10:41:20'),
-(5, 'Clifton Kling', 'vlehner@example.com', '2025-09-23 10:41:20', '$2y$12$S7E1WmAOYNZssILo/AKLJOzrI1fl6TDqMYIck6IL1Vub2yHK9W6UO', 'jDmwmUN72q', '2025-09-23 10:41:20', '2025-09-23 10:41:20'),
-(6, 'Shyanne Murazik', 'xboyle@example.net', '2025-09-23 10:41:20', '$2y$12$S7E1WmAOYNZssILo/AKLJOzrI1fl6TDqMYIck6IL1Vub2yHK9W6UO', 'j1laTg3DAq', '2025-09-23 10:41:20', '2025-09-23 10:41:20'),
-(7, 'Milton Dickinson', 'lyric58@example.net', '2025-09-23 10:41:20', '$2y$12$S7E1WmAOYNZssILo/AKLJOzrI1fl6TDqMYIck6IL1Vub2yHK9W6UO', 'gYt76ghi6b', '2025-09-23 10:41:20', '2025-09-23 10:41:20'),
-(8, 'Sabrina Collier', 'lyda55@example.com', '2025-09-23 10:41:20', '$2y$12$S7E1WmAOYNZssILo/AKLJOzrI1fl6TDqMYIck6IL1Vub2yHK9W6UO', 'N8DNMqKXvu', '2025-09-23 10:41:20', '2025-09-23 10:41:20'),
-(9, 'Ms. Carolanne Reilly', 'citlalli.swift@example.net', '2025-09-23 10:41:20', '$2y$12$S7E1WmAOYNZssILo/AKLJOzrI1fl6TDqMYIck6IL1Vub2yHK9W6UO', 'GsSP1CsqNt', '2025-09-23 10:41:20', '2025-09-23 10:41:20'),
-(10, 'Mrs. Natalia Reichert', 'anicolas@example.net', '2025-09-23 10:41:20', '$2y$12$S7E1WmAOYNZssILo/AKLJOzrI1fl6TDqMYIck6IL1Vub2yHK9W6UO', '8wp6MZozMU', '2025-09-23 10:41:20', '2025-09-23 10:41:20'),
-(11, 'Admin', 'admin@example.com', NULL, '$2y$12$/oO/KeMg6gKtcC8T7K8CZu1es7HU/nh.hmbvC0iosvy6eCvEBhskO', NULL, '2025-09-23 10:41:20', '2025-09-23 10:41:20'),
-(12, 'User', 'user1@example.com', NULL, '$2y$12$RDA9L2WyPAAfcjZGOjxW5.7i5KT0jfnedvZhr5hK9IdWJdZK0O6iW', NULL, '2025-09-23 10:41:20', '2025-09-23 10:41:20');
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `is_admin`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Evans O\'Reilly', 'davis.miles@example.net', '2025-09-24 06:29:40', '$2y$12$DlcVfE20Bn/7qMId1qjmLu1iuSgZinA4QKGcVEdFzpUNm5AUeIKca', '0', 'C6dyXdTnJF', '2025-09-24 06:29:40', '2025-09-24 06:29:40'),
+(2, 'Nayeli Dicki', 'mae.oreilly@example.com', '2025-09-24 06:29:40', '$2y$12$DlcVfE20Bn/7qMId1qjmLu1iuSgZinA4QKGcVEdFzpUNm5AUeIKca', '0', 'b4XEl8NdR2', '2025-09-24 06:29:40', '2025-09-24 06:29:40'),
+(3, 'Archibald Hand', 'nils16@example.org', '2025-09-24 06:29:40', '$2y$12$DlcVfE20Bn/7qMId1qjmLu1iuSgZinA4QKGcVEdFzpUNm5AUeIKca', '0', 'GXYkn4w98y', '2025-09-24 06:29:40', '2025-09-24 06:29:40'),
+(4, 'Prof. Arthur McLaughlin Jr.', 'qbalistreri@example.org', '2025-09-24 06:29:40', '$2y$12$DlcVfE20Bn/7qMId1qjmLu1iuSgZinA4QKGcVEdFzpUNm5AUeIKca', '0', 'IiFfwipk8F', '2025-09-24 06:29:40', '2025-09-24 06:29:40'),
+(5, 'Prof. Jarrell Keeling', 'ybaumbach@example.com', '2025-09-24 06:29:40', '$2y$12$DlcVfE20Bn/7qMId1qjmLu1iuSgZinA4QKGcVEdFzpUNm5AUeIKca', '0', 'iHFv5KnLD5', '2025-09-24 06:29:40', '2025-09-24 06:29:40'),
+(6, 'Christian Schoen', 'jackson.schumm@example.net', '2025-09-24 06:29:40', '$2y$12$DlcVfE20Bn/7qMId1qjmLu1iuSgZinA4QKGcVEdFzpUNm5AUeIKca', '0', 'WsWz2jHEXS', '2025-09-24 06:29:40', '2025-09-24 06:29:40'),
+(7, 'Mr. Russ Herman I', 'gloria.feeney@example.com', '2025-09-24 06:29:40', '$2y$12$DlcVfE20Bn/7qMId1qjmLu1iuSgZinA4QKGcVEdFzpUNm5AUeIKca', '0', 'EDRDJfNEpI', '2025-09-24 06:29:40', '2025-09-24 06:29:40'),
+(8, 'Beaulah Spencer', 'marielle66@example.org', '2025-09-24 06:29:40', '$2y$12$DlcVfE20Bn/7qMId1qjmLu1iuSgZinA4QKGcVEdFzpUNm5AUeIKca', '0', 'nWC2WBlbWt', '2025-09-24 06:29:40', '2025-09-24 06:29:40'),
+(9, 'Giovani Mitchell', 'bconroy@example.org', '2025-09-24 06:29:40', '$2y$12$DlcVfE20Bn/7qMId1qjmLu1iuSgZinA4QKGcVEdFzpUNm5AUeIKca', '0', 'slQEAseaPG', '2025-09-24 06:29:40', '2025-09-24 06:29:40'),
+(10, 'Lera Hyatt Jr.', 'iankunding@example.org', '2025-09-24 06:29:40', '$2y$12$DlcVfE20Bn/7qMId1qjmLu1iuSgZinA4QKGcVEdFzpUNm5AUeIKca', '0', 'uLodHDR2eT', '2025-09-24 06:29:40', '2025-09-24 06:29:40'),
+(11, 'Admin', 'admin@example.com', NULL, '$2y$12$e14J6mxFjzftmLA80CTczOatEUCMH45fAK.hIK8vCRTFdngEYjcLy', '1', NULL, '2025-09-24 06:29:41', '2025-09-24 06:29:41'),
+(12, 'User', 'user1@example.com', NULL, '$2y$12$q65YdwUxqSXlZ2XQwtCaE.R.nbToy8M3fLusqbux46aNu.yZS7IhG', '0', NULL, '2025-09-24 06:29:41', '2025-09-24 06:29:41');
 
 -- --------------------------------------------------------
 
@@ -286,13 +264,6 @@ CREATE TABLE `winners` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `winners`
---
-
-INSERT INTO `winners` (`id`, `ad_slot_id`, `bid_id`, `user_id`, `amount`, `created_at`, `updated_at`) VALUES
-(1, 7, 2, 2, 100.00, '2025-09-23 11:33:01', '2025-09-23 11:33:01');
-
---
 -- Indexes for dumped tables
 --
 
@@ -301,6 +272,7 @@ INSERT INTO `winners` (`id`, `ad_slot_id`, `bid_id`, `user_id`, `amount`, `creat
 --
 ALTER TABLE `ad_slots`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `ad_slots_name_unique` (`name`),
   ADD KEY `ad_slots_start_time_end_time_index` (`start_time`,`end_time`),
   ADD KEY `ad_slots_winner_bid_id_index` (`winner_bid_id`);
 
@@ -398,13 +370,13 @@ ALTER TABLE `winners`
 -- AUTO_INCREMENT for table `ad_slots`
 --
 ALTER TABLE `ad_slots`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `bids`
 --
 ALTER TABLE `bids`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -428,7 +400,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -440,7 +412,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `winners`
 --
 ALTER TABLE `winners`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables

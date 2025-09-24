@@ -3,7 +3,7 @@
 namespace App\Services;
 
 use Auth;
-
+use Log;
 class LoginService
 {
     public function login($request)
@@ -13,6 +13,7 @@ class LoginService
         }
 
         $user = Auth::user();
+        Log::info($user->id);
         $token = $user->createToken('api-token')->plainTextToken;
 
         return response()->json(['token' => $token, 'user' => $user]);
