@@ -1,0 +1,10 @@
+
+docker-compose down -v
+docker-compose up -d --build
+
+docker run -it --rm --network realtime-binding-app_laravel mysql:8.0 mysql -h db -u laravel -p'laravel' rtb_db
+
+docker exec -it realtime-binding-app php artisan migrate
+
+apt update && apt install -y procps
+ps aux | grep php-fpm
