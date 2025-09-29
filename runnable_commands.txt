@@ -8,3 +8,8 @@ docker exec -it realtime-binding-app php artisan migrate
 
 apt update && apt install -y procps
 ps aux | grep php-fpm
+
+
+docker-compose exec app php artisan queue:work
+docker-compose exec app php artisan schedule:work
+docker-compose up -d 

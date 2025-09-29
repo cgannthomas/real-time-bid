@@ -5,8 +5,9 @@ namespace App\Services;
 use App\Http\Requests\PlaceBidRequest;
 use App\Jobs\ProcessBidJob;
 use App\Models\AdSlot;
+use App\Models\Bid;
 use Illuminate\Support\Facades\Auth;
-
+use Log;
 class BidService
 {
     public function place($request, $adSlotId)
@@ -23,6 +24,9 @@ class BidService
             return response()->json(['message' => 'Bid below minimum price'], 400);
         }
 
+        if(Bid::where('user_id', $user->id)->where('ad_slot_id', $slot->id)->exists()) {
+            return response()->json(['message' => "Looks like you've already placed a bid!"], 400);
+        }
         // Queue the bid processing for concurrency & throughput
         ProcessBidJob::dispatch($user->id, $slot->id, $request->amount);
 

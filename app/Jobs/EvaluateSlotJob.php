@@ -72,5 +72,6 @@ class EvaluateSlotJob implements ShouldQueue
                 'updated_at' => now(),
             ]);
         });
+
     }
 }
